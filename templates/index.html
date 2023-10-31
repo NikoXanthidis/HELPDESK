@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Helpdesk</title>
+</head>
+<style>
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+<body>
+    <h1>Abrir Chamado de Helpdesk</h1>
+    <a href="http://127.0.0.1:5000/chamados" class="button">Lista de chamados</a>
+    <p>--FORMULÁRIO DE CHAMADOS--</p>
+    <form method="POST">
+        <label for="no me">Nome:</label>
+        <input type="text" name="nome" required><br>
+        <label for="setor">Setor:</label>
+        <input type="text" name="setor" required><br>
+        <label for="urgencia">Urgência:</label>
+        <select name="urgencia" required>
+            <option value="Alta">Alta</option>
+            <option value="Média">Média</option>
+            <option value="Baixa">Baixa</option>
+        </select><br>
+        <label for="descricao">Descrição:</label>
+        <p></p>
+        <textarea name="descricao" required></textarea><br>
+        <input type="submit" value="Abrir Chamado">
+    </form>
+</body>
+</html>

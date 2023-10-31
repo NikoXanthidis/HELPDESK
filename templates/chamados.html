@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chamados em Aberto e Concluídos</title>
+    <style>
+        /* Estilo para as abas */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Links para as abas */
+        .tab a {
+            float: left;
+            display: block;
+            background-color: inherit;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        /* Mudança de cor quando passar o mouse */
+        .tab a:hover {
+            background-color: #ddd;
+        }
+
+        /* Estilo do conteúdo das abas */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tab">
+    <a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Aberto')">Chamados em Aberto</a>
+    <a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Concluido')">Chamados Concluídos</a>
+</div>
+
+<!-- Conteúdo da aba de chamados em aberto -->
+<div id="Aberto" class="tabcontent">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Setor</th>
+            <th>Urgência</th>
+            <th>Descrição</th>
+            <th>Data de Criação</th>
+        </tr>
+        {% for chamado in chamados_abertos %}
+        <tr>
+            <td>{{ chamado[0] }}</td>
+            <td>{{ chamado[1] }}</td>
+            <td>{{ chamado[2] }}</td>
+            <td>{{ chamado[3] }}</td>
+            <td>{{ chamado[4] }}</td>
+            <td>{{ chamado[5] }}</td>
+            <td>
+                <form action="/marcar_resolvido/{{ chamado[0] }}" method="get">
+                    <input type="checkbox" onchange="this.form.submit()">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!-- Conteúdo da aba de chamados concluídos -->
+<div id="Concluido" class="tabcontent">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Setor</th>
+            <th>Urgência</th>
+            <th>Descrição</th>
+            <th>Data de Criação</th>
+        </tr>
+        {% for chamado in chamados_concluidos %}
+        <tr>
+            <td>{{ chamado[0] }}</td>
+            <td>{{ chamado[1] }}</td>
+            <td>{{ chamado[2] }}</td>
+            <td>{{ chamado[3] }}</td>
+            <td>{{ chamado[4] }}</td>
+            <td>{{ chamado[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+</body>
+</html>
